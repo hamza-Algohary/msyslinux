@@ -343,7 +343,7 @@ def save_installed_packages():
 def get_dlls_as_java_array(packages):
     arr = ""
     for dll in get_dll_paths(packages):
-        arr += "\t\t\""+"/"+os.path.basename(dll)+"\",\n"
+        arr += "\t\t\""+os.path.basename(dll)+"\",\n"
     return arr
 
 def get_java_source(packages):
@@ -397,6 +397,7 @@ public class """ +options["--class"] + """ {
 
 def print_java_source_file():
     global packages
+    packages.update(get_all_dependencies_of_packages(packages))
     print(get_java_source(packages))   
 
 commands = {
